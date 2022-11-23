@@ -1,8 +1,17 @@
 <html>
   <head>
     <script type="module">
-      
+      import {checkoutForm, checkoutFormStyle} from './index.js'
+      customElements.define('checkout-form', checkoutForm, { extends:'form' })
+      customElements.define('checkout-form-style', checkoutFormStyle, { extends:'style'})
+      document.head.append(new checkoutFormStyle)
+      document.body.append(new checkoutForm())
     </script>
+    <style>
+      body {
+        margin: 3%;
+      }
+    </style>
   </head>
   <body></body>
 </html>
