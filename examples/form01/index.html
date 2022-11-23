@@ -1,11 +1,7 @@
 <html>
   <head>
     <script type="module">
-      import {checkoutForm, checkoutFormStyle} from './index.js'
-      customElements.define('checkout-form', checkoutForm, { extends:'form' })
-      customElements.define('checkout-form-style', checkoutFormStyle, { extends:'style'})
-      document.head.append(new checkoutFormStyle)
-      document.body.append(new checkoutForm())
+      import './index.js'
     </script>
     <style>
       body {
@@ -13,5 +9,24 @@
       }
     </style>
   </head>
-  <body></body>
+  <body>
+    <h2>Strategies for forms with computed values.</h2>
+    <p>
+      Forms with computed values should update the computed value as data in the form changes.
+      We have a few options to make this happen.
+      <br/>
+      <b>Options</b>
+      <ol>
+        <li>We could re-run the whole template on each change, this way we don't have to know too much about our form and the code stays fairly simple and is mostly reusable boilerplate. 
+            This works when there are no external mutation observers watching component elements. Depending on the event listener used we may need to keep track of the input focus (easy enough) and we need to make sure we are cleaning up any eventListeners so we don't have a memory leak.</li>
+        <li> Or we can update just the value that needs to change. This requires us to write more code specific to the form we are manking, but in the end the coding time is trivial, but we do need to keep track of the timing of events.</li>
+        <li> We could use a proxy object on the model, but that is essentially the same thing as option #2, except it shifts the tracking of timing issues to the proxy 
+      </ol>
+      </p>
+      <p>
+      In an option #1 example we wouldn't need to have a total in our model, we can just calculate it in the template.
+      We would not need the updateComputedValues method either.
+    </p>
+
+  </body>
 </html>
