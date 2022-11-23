@@ -6,7 +6,8 @@ export class checkoutForm03 extends HTMLFormElement {
     const defaultModel = {
       price: 0,
       quantity: 0,
-      total: 0
+      total: 0,
+      foo:"hello"
     }
 
     const self = this // yeah, not ideal but works till I find a better way
@@ -14,7 +15,7 @@ export class checkoutForm03 extends HTMLFormElement {
       get(obj, prop) {
         return prop in obj ? obj[prop]:null
       },
-      set(obj, prop, value) {
+      set(obj, prop, value, receiver) {
         if(!(prop in obj)) return
         if(obj[prop] === value) return
          // we could check and cast any strings to int's here as well
@@ -29,7 +30,6 @@ export class checkoutForm03 extends HTMLFormElement {
   connectedCallback(){
     this.innerHTML = this.templateLit()
     this.addEventListener('change', (evt)=>{
-      // const tempModel = Object.fromEntries(new FormData(this).entries())
       const propName = evt.target.name
       this.model[propName] = evt.target.value
     })
